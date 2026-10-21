@@ -13,7 +13,11 @@ export async function getStaticPaths() {
 }
 
 const { artigo } = Astro.props;
-const { Content } = await render(artigo);
+const { Content, headings } = await render(artigo);
+
+const indice = headings.filter(
+  (heading) => heading.depth === 2 || heading.depth === 3,
+);
 ---
 
 <PostLayout
@@ -23,6 +27,7 @@ const { Content } = await render(artigo);
   pubDate={artigo.data.pubDate}
   image={artigo.data.image}
   imageAlt={artigo.data.imageAlt}
+  headings={indice}
 >
   <Content />
 </PostLayout>

@@ -14,3 +14,19 @@ imageAlt: "Ilustração sobre o Astro CMS"
 O Astro é um framework para construir sites rápidos, com foco em conteúdo.
 
 Neste artigo, vamos registrar os primeiros aprendizados sobre o framework, sua estrutura de arquivos e os recursos utilizados para desenvolver um blog.
+
+## O que é o Astro?
+
+Texto explicativo.
+
+## Instalação
+
+Texto explicativo.
+
+## Criando o projeto
+
+Texto explicativo.
+
+## Próximos passos
+
+Texto explicativo.

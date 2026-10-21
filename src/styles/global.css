@@ -470,3 +470,54 @@ a {
   aspect-ratio: 16 / 9;
   object-fit: cover;
 }
+
+
+/* Índice de conteúdo do artigo */
+
+.post-toc {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.post-toc__title {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.post-toc__list {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.post-toc__list li {
+  margin-block: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.post-toc__subitem {
+  margin-left: 1rem;
+  font-size: 0.95rem;
+}
+
+.post-toc a {
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.post-toc a:hover {
+  text-decoration: underline;
+}
+
+.post-body h2,
+.post-body h3 {
+  scroll-margin-top: 1.5rem;
+}
+
+@media (max-width: 760px) {
+  .post-toc {
+    padding: 1rem;
+  }
+}
