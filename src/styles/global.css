@@ -39,3 +39,124 @@ img {
 a {
   color: inherit;
 }
+
+
+
+/* Cabeçalho */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-large);
+  width: min(100% - 2rem, var(--content-width));
+  margin-inline: auto;
+  padding-block: 1.25rem;
+}
+
+.site-logo {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Busca */
+
+.site-search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 320px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.site-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.65rem;
+  border: 0;
+  outline: none;
+  font: inherit;
+  background: transparent;
+  color: inherit;
+}
+
+.site-search button {
+  display: grid;
+  place-items: center;
+  padding: 0.55rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Navegação */
+
+.main-nav,
+.social-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+}
+
+.social-nav a {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.main-nav a:hover,
+.social-nav a:hover {
+  color: var(--color-text-muted);
+}
+
+/* Telas menores */
+
+@media (max-width: 760px) {
+  .site-header {
+    flex-wrap: wrap;
+    gap: var(--spacing-medium);
+  }
+
+  .site-logo {
+    margin-right: auto;
+  }
+
+  .site-search {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .main-nav,
+  .social-nav {
+    gap: 0.65rem;
+  }
+
+  .social-nav a {
+    padding: 0.4rem 0.55rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header {
+    width: calc(100% - 1.5rem);
+  }
+
+  .social-nav {
+    gap: 0.4rem;
+  }
+
+  .social-nav a {
+    font-size: 0.85rem;
+  }
+}

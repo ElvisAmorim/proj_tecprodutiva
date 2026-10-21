@@ -1,0 +1,50 @@
+
+---
+const nomeBlog = "TecProdutiva";
+---
+
+<header class="site-header">
+  <a class="site-logo" href="/" aria-label="Página inicial">
+    {nomeBlog}
+  </a>
+
+  <form class="site-search" role="search" action="/busca/">
+    <input
+      type="search"
+      name="q"
+      placeholder="Buscar artigos..."
+      aria-label="Buscar artigos"
+    />
+    <button type="submit" aria-label="Pesquisar">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-4-4" />
+      </svg>
+    </button>
+  </form>
+
+  <nav class="main-nav" aria-label="Navegação principal">
+    <a href="/">Início</a>
+    <a href="/sobre/">Sobre</a>
+  </nav>
+
+  <nav class="social-nav" aria-label="Redes sociais">
+    <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer">
+      YouTube
+    </a>
+    <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer">
+      TikTok
+    </a>
+  </nav>
+</header>
