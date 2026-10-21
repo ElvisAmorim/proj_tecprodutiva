@@ -1,0 +1,27 @@
+
+---
+const categorias = [
+  { nome: "Todas", href: "/" },
+  { nome: "Tecnologia", href: "/categoria/tecnologia/" },
+  { nome: "Desenvolvimento", href: "/categoria/desenvolvimento/" },
+  { nome: "Tutoriais", href: "/categoria/tutoriais/" },
+  { nome: "Dicas", href: "/categoria/dicas/" },
+  { nome: "Projetos", href: "/categoria/projetos/" },
+];
+---
+
+<nav class="category-nav" aria-label="Categorias de artigos">
+  <div class="category-nav__inner">
+    {categorias.map((categoria) => (
+      <a
+        class:list={[
+          "category-nav__link",
+          { "category-nav__link--active": categoria.nome === "Todas" },
+        ]}
+        href={categoria.href}
+      >
+        {categoria.nome}
+      </a>
+    ))}
+  </div>
+</nav>
