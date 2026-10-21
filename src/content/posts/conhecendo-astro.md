@@ -27,6 +27,10 @@ Texto explicativo.
 
 Texto explicativo.
 
+```python
+print("Helo word!")
+```
+
 ## Próximos passos
 
 Texto explicativo.
