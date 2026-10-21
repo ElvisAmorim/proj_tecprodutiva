@@ -1,0 +1,41 @@
+
+:root {
+  color-scheme: light;
+
+  --color-background: #ffffff;
+  --color-text: #252525;
+  --color-text-muted: #666666;
+  --color-border: #e5e5e5;
+
+  --font-family-base: Arial, Helvetica, sans-serif;
+
+  --content-width: 1200px;
+
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
