@@ -1,0 +1,46 @@
+
+---
+interface Props {
+  title: string;
+  date: string;
+  category: string;
+  image: string;
+  imageAlt: string;
+  href: string;
+}
+
+const { title, date, category, image, imageAlt, href } =
+  Astro.props;
+
+const dataFormatada = new Date(`${date}T12:00:00`).toLocaleDateString(
+  "pt-BR",
+  {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  },
+);
+---
+
+<article class="post-card">
+  <a class="post-card__image-link" href={href} aria-label={title}>
+    <img
+      class="post-card__image"
+      src={image}
+      alt={imageAlt}
+      loading="lazy"
+    />
+  </a>
+
+  <div class="post-card__content">
+    <div class="post-card__meta">
+      <span class="post-card__category">{category}</span>
+      <time datetime={date}>{dataFormatada}</time>
+    </div>
+
+    <h2 class="post-card__title">
+      <a href={href}>{title}</a>
+    </h2>
+  </div>
+</article>

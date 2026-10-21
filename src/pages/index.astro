@@ -1,13 +1,46 @@
 
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
 
 const titulo = "Meu Blog";
+
+const artigos = [
+  {
+    title: "Conhecendo o Astro: primeiros passos",
+    date: "2026-10-15",
+    category: "Desenvolvimento",
+    image: "/images/astro.jpeg",
+    imageAlt: "Ilustração relacionada ao Astro",
+    href: "/posts/conhecendo-astro/",
+  },
+  {
+    title: "Como organizar projetos com Git",
+    date: "2026-10-12",
+    category: "Tutoriais",
+    image: "/images/git.jpg",
+    imageAlt: "Ilustração relacionada ao Git",
+    href: "/posts/organizar-projetos-git/",
+  },
+  {
+    title: "Markdown para documentação técnica",
+    date: "2026-10-08",
+    category: "Dicas",
+    image: "/images/markdown.jpg",
+    imageAlt: "Ilustração relacionada ao Markdown",
+    href: "/posts/markdown-documentacao/",
+  },
+];
 ---
 
 <BaseLayout title={titulo}>
-  <main>
-    <h1>{titulo}</h1>
-    <p>Meu novo blog está começando.</p>
+  <main class="home-content">
+    <h1 class="home-title">Artigos recentes</h1>
+
+    <div class="post-grid">
+      {artigos.map((artigo) => (
+        <PostCard {...artigo} />
+      ))}
+    </div>
   </main>
 </BaseLayout>
