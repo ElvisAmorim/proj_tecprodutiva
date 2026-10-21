@@ -452,3 +452,21 @@ a {
     font-size: 1.05rem;
   }
 }
+
+
+/* Imagem de capa do artigo */
+
+.post-cover {
+  margin: 2rem 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-border);
+}
+
+.post-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}

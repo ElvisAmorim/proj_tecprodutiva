@@ -6,6 +6,7 @@ pubDate: 2026-10-15
 category: "Desenvolvimento"
 image: "/images/astro.jpeg"
 imageAlt: "Ilustração sobre o Astro CMS"
+
 ---
 
 # Conhecendo o Astro

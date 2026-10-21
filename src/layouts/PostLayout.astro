@@ -7,9 +7,11 @@ interface Props {
   description: string;
   category: string;
   pubDate: Date;
+  image: string;
+  imageAlt: string;
 }
 
-const { title, description, category, pubDate } = Astro.props;
+const { title, description, category, pubDate, image, imageAlt } = Astro.props;
 
 const dataFormatada = pubDate.toLocaleDateString("pt-BR", {
   day: "2-digit",
@@ -34,6 +36,12 @@ const dataFormatada = pubDate.toLocaleDateString("pt-BR", {
         Publicado em {dataFormatada}
       </time>
     </header>
+
+    {image && (
+        <figure class="post-cover">
+        <img src={image} alt={imageAlt} />
+    </figure>
+    )}
 
     <article class="post-body">
       <slot />
