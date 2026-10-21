@@ -1,36 +1,16 @@
 
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 
-const titulo = "Meu Blog";
+const titulo = "TecProdutiva";
 
-const artigos = [
-  {
-    title: "Conhecendo o Astro: primeiros passos",
-    date: "2026-10-15",
-    category: "Desenvolvimento",
-    image: "/images/astro.jpeg",
-    imageAlt: "Ilustração relacionada ao Astro",
-    href: "/posts/conhecendo-astro/",
-  },
-  {
-    title: "Como organizar projetos com Git",
-    date: "2026-10-12",
-    category: "Tutoriais",
-    image: "/images/git.jpg",
-    imageAlt: "Ilustração relacionada ao Git",
-    href: "/posts/organizar-projetos-git/",
-  },
-  {
-    title: "Markdown para documentação técnica",
-    date: "2026-10-08",
-    category: "Dicas",
-    image: "/images/markdown.jpg",
-    imageAlt: "Ilustração relacionada ao Markdown",
-    href: "/posts/markdown-documentacao/",
-  },
-];
+const artigos = (await getCollection("posts"))
+  .sort(
+    (a, b) =>
+      b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+  );
 ---
 
 <BaseLayout title={titulo}>
@@ -39,7 +19,14 @@ const artigos = [
 
     <div class="post-grid">
       {artigos.map((artigo) => (
-        <PostCard {...artigo} />
+        <PostCard
+          title={artigo.data.title}
+          date={artigo.data.pubDate.toISOString().slice(0, 10)}
+          category={artigo.data.category}
+          image={artigo.data.image}
+          imageAlt={artigo.data.imageAlt}
+          href={`/posts/${artigo.id}/`}
+        />
       ))}
     </div>
   </main>
