@@ -1,0 +1,178 @@
+
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Buscar artigos | TecProdutiva"
+  description="Pesquise artigos e tutoriais do TecProdutiva."
+>
+  <main class="search-page">
+    <h1>Buscar artigos</h1>
+
+    <p class="search-intro">
+      Encontre tutoriais, dicas e artigos do TecProdutiva.
+    </p>
+
+    <form class="search-form" id="search-form" action="/busca/" method="get">
+      <label for="search-query">O que você procura?</label>
+
+      <div class="search-form__controls">
+        <input
+          id="search-query"
+          name="q"
+          type="search"
+          placeholder="Ex.: Astro, Git, Markdown..."
+          autocomplete="off"
+        />
+
+        <button type="submit">Pesquisar</button>
+      </div>
+    </form>
+
+    <p id="search-status" role="status" aria-live="polite">
+      Digite um termo para pesquisar.
+    </p>
+
+    <div id="search-results" class="search-results"></div>
+  </main>
+</BaseLayout>
+
+<script>
+  interface ArtigoBusca {
+    title: string;
+    description: string;
+    category: string;
+    pubDate: string;
+    href: string;
+  }
+
+  const form = document.querySelector<HTMLFormElement>("#search-form");
+  const input = document.querySelector<HTMLInputElement>("#search-query");
+  const status = document.querySelector<HTMLElement>("#search-status");
+  const results = document.querySelector<HTMLElement>("#search-results");
+
+  function normalizar(texto: string) {
+    return texto
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
+  }
+
+  function exibirResultados(artigos: ArtigoBusca[]) {
+    if (!results || !status || !input) return;
+
+    const termo = normalizar(input.value);
+
+    results.replaceChildren();
+
+    if (!termo) {
+      status.textContent = "Digite um termo para pesquisar.";
+      return;
+    }
+
+    const encontrados = artigos.filter((artigo) => {
+      const texto = normalizar(
+        `${artigo.title} ${artigo.description} ${artigo.category}`,
+      );
+
+      return texto.includes(termo);
+    });
+
+    status.textContent = encontrados.length
+      ? `${encontrados.length} artigo(s) encontrado(s).`
+      : "Nenhum artigo encontrado. Tente outro termo.";
+
+    for (const artigo of encontrados) {
+      const card = document.createElement("article");
+      card.className = "search-result";
+
+      const categoria = document.createElement("p");
+      categoria.className = "search-result__category";
+      categoria.textContent = artigo.category;
+
+      const titulo = document.createElement("h2");
+      const link = document.createElement("a");
+      link.href = artigo.href;
+      link.textContent = artigo.title;
+      titulo.append(link);
+
+      const descricao = document.createElement("p");
+      descricao.textContent = artigo.description;
+
+      const data = document.createElement("time");
+      data.dateTime = artigo.pubDate;
+      data.textContent = new Date(artigo.pubDate).toLocaleDateString(
+        "pt-BR",
+        {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          timeZone: "UTC",
+        },
+      );
+
+      card.append(categoria, titulo, descricao, data);
+      results.append(card);
+    }
+  }
+
+  if (form && input && status && results) {
+    let artigos: ArtigoBusca[] = [];
+
+    const parametros = new URLSearchParams(window.location.search);
+    input.value = parametros.get("q") ?? "";
+
+    
+    async function iniciarBusca() {
+    if (!input || !status) return;
+
+    const termo = input.value.trim();
+
+    if (!termo) {
+        exibirResultados(artigos);
+        return;
+    }
+
+    status.textContent = "Carregando artigos...";
+
+    try {
+        const resposta = await fetch("/busca-index.json");
+
+        if (!resposta.ok) {
+        throw new Error("Não foi possível carregar o índice.");
+        }
+
+        artigos = await resposta.json() as ArtigoBusca[];
+        exibirResultados(artigos);
+    } catch {
+        if (!status) return;
+
+        status.textContent =
+        "Não foi possível carregar a busca. Tente novamente.";
+    }
+}
+
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const url = new URL(window.location.href);
+      const termo = input.value.trim();
+
+      if (termo) {
+        url.searchParams.set("q", termo);
+      } else {
+        url.searchParams.delete("q");
+      }
+
+      window.history.replaceState(null, "", url);
+      await iniciarBusca();
+    });
+
+    if (input.value.trim()) {
+      void iniciarBusca();
+    }
+  }
+</script>
