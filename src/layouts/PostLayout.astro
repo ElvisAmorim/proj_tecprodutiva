@@ -75,3 +75,43 @@ const dataFormatada = pubDate.toLocaleDateString("pt-BR", {
     </article>
   </main>
 </BaseLayout>
+
+
+<script>
+  document.querySelectorAll(".post-body pre").forEach((pre) => {
+    if (pre.parentElement?.classList.contains("code-block")) {
+      return;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "code-block";
+
+    const button = document.createElement("button");
+    button.className = "code-copy";
+    button.type = "button";
+    button.textContent = "Copiar código";
+    button.setAttribute("aria-label", "Copiar código");
+
+    pre.before(wrapper);
+    wrapper.append(button, pre);
+
+    button.addEventListener("click", async () => {
+      const code = pre.querySelector("code")?.textContent ?? pre.textContent ?? "";
+
+      try {
+        await navigator.clipboard.writeText(code);
+
+        button.textContent = "Copiado!";
+        button.setAttribute("aria-label", "Código copiado");
+      } catch {
+        button.textContent = "Não foi possível copiar";
+      }
+
+      window.setTimeout(() => {
+        button.textContent = "Copiar código";
+        button.setAttribute("aria-label", "Copiar código");
+      }, 2000);
+    });
+  });
+</script>
+

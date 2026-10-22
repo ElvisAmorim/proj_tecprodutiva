@@ -13,3 +13,10 @@ imageAlt: "Ilustração sobre Markdown"
 Markdown é uma linguagem de marcação leve, muito utilizada em documentação, blogs e repositórios de código.
 
 Com títulos, listas, links e blocos de código, podemos escrever conteúdo estruturado sem precisar produzir HTML manualmente.
+
+
+## Exemplo
+
+```js
+const mensagem = "Olá, TecProdutiva!";
+console.log(mensagem);
